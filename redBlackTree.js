@@ -45,10 +45,6 @@ RedBlackTree.prototype.insert = function(value) {
 	rbtInsert(root, value);
 	var root = root.findRoot();
 	if (root.color === "red") {root.findRoot().color = "black"}
-	if (root.value === 50) {
-		console.log(root.rightChild.leftChild.parent.rightChild.value);
-		console.log(root.rightChild.leftChild.value);
-	}
 };
 
 RedBlackTree.prototype.contains = function(target, flag) {
@@ -197,13 +193,6 @@ RedBlackTree.prototype.oneRotation = function(){
 		parent.leftChild = grandParent,
 		grandParent.rightChild = tree
 	);
-	if (right) {
-		if (this.findRoot().value === 50) {
-			console.log(this.findRoot().rightChild.leftChild.value, 
-				this.findRoot().rightChild.leftChild.parent.leftChild.value);
-		}
-	}
-
 }
 
 RedBlackTree.prototype.twoRotations = function(){
@@ -303,13 +292,10 @@ for (var i = 0; i < 30; i++) {
 	else {
 		tree.insert(random);
 	}
-	console.log(i, tree.contains(random), random);
 	if (!tree.contains(random)) {
 		throw new Error("Cannot find inserted node", random);
 	}
 }
-
-console.log(tree.findRoot);
 
 var i = 0;
 var width = window.innerWidth;
@@ -322,9 +308,7 @@ var svg = d3.select('body').append('svg')
 var root = tree.findRoot();
 var t = d3.layout.tree();
 var nodesStore = root.breadthFirstRet(root.d3ify);
-console.log(root.findRoot());
 var nodes = t.nodes(root.findRoot());
-console.log(nodes.length);
 var links = t.links(nodes);
 var node = svg.selectAll(".node")
 	.data(nodes)
